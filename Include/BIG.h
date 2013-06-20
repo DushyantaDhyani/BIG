@@ -1,3 +1,4 @@
+#include"bool.h"
 #ifndef BIG_INTEGER
 #define BIG_INTEGER
 
@@ -11,6 +12,9 @@ typedef struct {
 	size_t length;
 	short sign;
 } BIG;
-BIG* newBIG(char *,size_t);
-BIG* add(BIG*,BIG*);
-BIG* sub
+BIG* newBIG(char*);
+BIG* addBIG(BIG*,BIG*);
+BIG* subBIG(BIG*,BIG*);
+char* toStringBIG(BIG*);
+bool equalBIG(BIG* , BIG*);
+#endif
