@@ -3,6 +3,6 @@
 int main(){
 	char *str;
 	scanf("%s",str);
-	BIG *big=(BIG*)newBIG(str);
+	BIG *big=newBIG(str);
 	return 0;
 }

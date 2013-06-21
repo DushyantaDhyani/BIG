@@ -1,6 +1,6 @@
-#include"bool.h"
-#ifndef BIG_INTEGER
-#define BIG_INTEGER
+#include "bool.h"
+#ifndef BIG_INTEGER_H
+#define BIG_INTEGER_H
 
 /* Structure To Store The New BIG Data Type.It Includes
    The Character Array That stores the Data.
@@ -17,4 +17,5 @@ BIG* addBIG(BIG*,BIG*);
 BIG* subBIG(BIG*,BIG*);
 char* toStringBIG(BIG*);
 bool equalBIG(BIG* , BIG*);
+
 #endif
