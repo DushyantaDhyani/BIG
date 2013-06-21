@@ -8,5 +8,6 @@ int main(){
 	BIG *big=newBIG(str);
 	char *eqStr;
 	eqStr=toStringBIG(big);
+	printf("%s\n",eqStr);
 	return 0;
 }
