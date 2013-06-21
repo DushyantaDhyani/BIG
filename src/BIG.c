@@ -21,11 +21,11 @@ BIG* newBIG(char *arr){
 		else{
 			big->sign=1;
 		}
-		len=len-i;
 	}
 	while(arr[i]=='0'){
 		i++;
 	}
+	len=len-i;
 	big->length=len;	
 	big->data=(char *)malloc((len+1)*sizeof(char));
 	if(big->data=='\0'){
@@ -59,4 +59,22 @@ char* toStringBIG(BIG *big){
 	str[k]='\0';
 	return str;
 }
-
+bool equalBIG(BIG *big1, BIG *big2){
+	int i,j;
+	if(big1->sign != big2->sign){
+		return false;
+	}
+	else{
+		if(big1->length != big2->length){
+			return false;
+		}
+		i=0;
+		while(i<(big1->length)){
+			if(big1->data[i] != big2->data[i]){
+				return false;
+			}
+			i++;
+		}
+		return true;
+	}
+}
