@@ -11,11 +11,9 @@ int main(){
 	scanf("%s",str2);
 	BIG *big1=newBIG(str1);
 	BIG *big2=newBIG(str2);
-	if(equalBIG(big1,big2)){
-		printf("The two are equal\n");
-	}
-	else{
-		printf("The two are different\n");
-	}
+	BIG *sum=addBIG(big1,big2);
+	char *value;
+	value=toStringBIG(sum);
+	printf("%s\n",value);
 	return 0;
 }
