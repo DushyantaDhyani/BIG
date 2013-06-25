@@ -17,5 +17,6 @@ BIG* addBIG(BIG*,BIG*);
 BIG* subBIG(BIG*,BIG*);
 char* toStringBIG(BIG*);
 bool equalBIG(BIG* , BIG*);
+int compareMagnitudeBIG(BIG*, BIG*);
 
 #endif
