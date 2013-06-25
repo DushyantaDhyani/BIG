@@ -106,8 +106,6 @@ bool equalBIG(BIG *big1, BIG *big2){
 	}
 }
 BIG* addBIG(BIG *big1,BIG *big2){
-	printf("1st Number %s\n",toStringBIG(big1));
-	printf("2nd Number %s\n",toStringBIG(big2));
 	BIG *sum;
 	BIG temp1,temp2;
 	temp1=*big1;
@@ -167,7 +165,105 @@ BIG* addBIG(BIG *big1,BIG *big2){
 	}
 	return sum;
 }
+void checkBIG(BIG *big1){
+
+}
 BIG* subBIG(BIG *big1,BIG *big2){
 	BIG *sub;
+	BIG temp1,temp2;
+	temp1=*big1;
+	temp2=*big2;
+	int i;
+	int flag=compareMagnitudeBIG(big1,big2);
+	if(flag==1){
+		if(big1->sign==1){
+			if(big2->sign==1){
+				sub=(BIG *)malloc(sizeof(BIG));
+				sub->data=(char *)malloc(sizeof(big1->length+1));
+				i=0;
+				while((big2->data)[i]!='\0' && (big1->data)[i]!='\0'){
+					if((big1->data)[i]>=(big2->data)[i]){
+						(sub->data)[i]=((big1->data)[i]-(big2->data)[i]+'0');
+					}
+					else{
+						(big1->data)[i+1]--;
+						(sub->data)[i]=10+(big1->data)[i]-(big2->data)[i]+'0';
+					}
+					i++;
+				}
+				while((big1->data)[i]!='\0'){
+					(sub->data)[i]=(big1->data)[i];
+					i++;
+				}
+				(sub->data)[i]='\0';
+				(sub->length)=i;
+				sub->sign=1;
+			}
+			else{
+				temp2.sign=1;
+				sub=addBIG(&temp1,&temp2);
+				sub->sign=1;
+			}
+		}
+		else{
+			if(big2->sign==1){
+				temp1.sign=1;
+				sub=addBIG(&temp1,&temp2);		
+				sub->sign=-1;
+			}
+			else{
+				temp1.sign=1;
+				temp2.sign=1;
+				sub=subBIG(&temp1,&temp2);
+				sub->sign=-1;
+			}
+		}
+	}
+	else if(flag==-1){
+		if(big1->sign==1){
+			if(big2->sign==1){
+				sub=subBIG(&temp2,&temp1);
+				sub->sign=-1;
+			}
+			else{
+				temp2.sign=1;
+				sub=addBIG(&temp1,&temp2);
+				sub->sign=1;
+			}
+		}
+		else{
+			if(big2->sign==1){
+				temp1.sign=1;
+				sub=addBIG(&temp1,&temp2);
+				sub->sign=-1;
+			}
+			else{
+				temp1.sign=1;
+				temp2.sign=1;
+				sub=subBIG(&temp2,&temp1);
+				sub->sign=1;
+			}
+		}
+	}
+	else{
+		if((big1->sign * big2->sign)==1){
+			sub=(BIG*)malloc(sizeof(BIG));
+			sub->data=(char*) malloc(2*sizeof(char));
+			(sub->data)[0]='0';
+			(sub->data)[1]='\0';
+			sub->sign=1;
+		}
+		else{
+			if(big1->sign==1){
+				sub=addBIG(&temp1,&temp1);
+				sub->sign=1;
+			}
+			else{
+				temp1.sign=1;
+				sub=addBIG(&temp1,&temp2);
+				sub->sign=-1;
+			}
+		}
+	}
 	return sub;
 }
