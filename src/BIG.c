@@ -189,9 +189,6 @@ BIG* addBIG(BIG *big1,BIG *big2){
 	}
 	return sum;
 }
-void checkBIG(BIG *big1){
-
-}
 BIG* subBIG(BIG *big1,BIG *big2){
 	BIG *sub;
 	BIG temp1,temp2;
@@ -290,4 +287,8 @@ BIG* subBIG(BIG *big1,BIG *big2){
 		}
 	}
 	return sub;
+}
+BIG* absBIG(BIG *big1){
+	big1->sign=1;
+	return big1;
 }
