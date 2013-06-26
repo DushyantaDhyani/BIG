@@ -44,6 +44,14 @@ BIG* newBIG(char *arr){
 	big->data[k]='\0';
 	return big;
 }
+BIG* newNULL(BIG* big1){
+	big1=(BIG *)malloc(sizeof(big1));
+	big1->data=(char *)malloc(1*sizeof(char));
+	big1->length=0;
+	big1->sign=1;
+	(big1->data)[0]='\0';
+	return big1;
+}
 char* toStringBIG(BIG *big){
 	char *str;
 	int k,i;
@@ -271,4 +279,23 @@ BIG* absBIG(BIG *big1){
 BIG* negateBIG(BIG *big1){
 	big1->sign *=-1;
 	return big1;
+}
+BIG* multiplyDigitBIG(BIG *big1,int num){
+	BIG *result;
+	result=(BIG *)malloc(sizeof(BIG));
+	result->data=(char *)malloc((2+big1->length)*sizeof(char));
+	int carry=0;
+	int i=0;
+	while(i< big1->length){
+		(result->data)[i]=((((big1->data)[i]-'0')*num+carry)%10)+'0';
+		carry=(((big1->data)[i]-'0')*num+carry)/10;
+		i++;
+	}
+	if(carry!=0){
+		(result->data)[i]=carry+'0';
+		i++;
+	}
+	result->length=i;
+	(result->data)[i]='\0';
+	return result;
 }

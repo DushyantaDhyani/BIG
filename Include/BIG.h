@@ -20,4 +20,6 @@ bool equalBIG(BIG* , BIG*);
 int compareMagnitudeBIG(BIG*,BIG*);
 BIG* absBIG(BIG*);
 BIG* negateBIG(BIG*);
+BIG* multiplyBIG(BIG*,BIG*);
+BIG* multiplyDigitBIG(BIG* ,int );
 #endif
