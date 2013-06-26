@@ -292,3 +292,7 @@ BIG* absBIG(BIG *big1){
 	big1->sign=1;
 	return big1;
 }
+BIG* negateBIG(BIG *big1){
+	big1->sign *=-1;
+	return big1;
+}
