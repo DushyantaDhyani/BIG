@@ -105,30 +105,6 @@ bool equalBIG(BIG *big1, BIG *big2){
 		return true;
 	}
 }
-int compareMagnitudeBIG(BIG *big1,BIG *big2){
-	int j;
-	if(big1->length == big2->length){
-		j=(big1->length)-1;
-		while(j>=0){
-			if((big1->data)[j]>(big2->data)[j]){
-				return 1;
-			}
-			else if((big1->data)[j]<(big2->data)[j]){
-				return -1;
-			}
-			j--;
-		}
-		return 0;
-	}
-	else{
-		if(big1->length > big2->length){
-			return 1;
-		}
-		else{
-			return -1;
-		}
-	}
-}
 BIG* addBIG(BIG *big1,BIG *big2){
 	BIG *sum;
 	BIG temp1,temp2;
