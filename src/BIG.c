@@ -280,6 +280,33 @@ BIG* negateBIG(BIG *big1){
 	big1->sign *=-1;
 	return big1;
 }
+BIG* multiplyBIG(BIG *big1,BIG *big2){
+	BIG *result;
+	BIG *temp1,*temp2;
+	BIG *product;
+	result=(BIG *)malloc(sizeof(BIG));
+	if((big1->sign * big2->sign)==1){
+		result->sign=1;
+	}
+	else{
+		result->sign=-1;
+	}
+	result->data=(char *)malloc((big1->length+big2->length+1)*sizeof(char));
+	(result->data)[0]='\0';
+	int offset=0;
+	int i,j;
+	i=0;
+	j=0;
+	char *value;
+	while(i< big2->length){
+		product=multiplyDigitBIG(big1,((big2->data)[i]-'0'));
+		j=0;
+		while((result->data)[j]
+		offset++;
+		i++;
+	}
+	return result;
+}
 BIG* multiplyDigitBIG(BIG *big1,int num){
 	BIG *result;
 	result=(BIG *)malloc(sizeof(BIG));
