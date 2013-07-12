@@ -13,6 +13,7 @@ typedef struct {
 	short sign;
 } BIG;
 BIG* newBIG(char*);
+void freeBIG(BIG** big);
 BIG* addBIG(BIG*,BIG*);
 BIG* subBIG(BIG*,BIG*);
 char* toStringBIG(BIG*);

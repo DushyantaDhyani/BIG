@@ -44,6 +44,12 @@ BIG* newBIG(char *arr){
 	big->data[k]='\0';
 	return big;
 }
+void freeBIG(BIG** big){
+	if(big){
+		free((*big)->data);
+		free(*big);
+	}
+}
 BIG* newNULL(BIG* big1){
 	big1=(BIG *)malloc(sizeof(big1));
 	big1->data=(char *)malloc(1*sizeof(char));
@@ -282,7 +288,6 @@ BIG* negateBIG(BIG *big1){
 }
 BIG* multiplyBIG(BIG *big1,BIG *big2){
 	BIG *result;
-	BIG *temp1,*temp2;
 	BIG *product;
 	result=(BIG *)malloc(sizeof(BIG));
 	if((big1->sign * big2->sign)==1){
@@ -292,22 +297,47 @@ BIG* multiplyBIG(BIG *big1,BIG *big2){
 		result->sign=-1;
 	}
 	result->data=(char *)malloc((big1->length+big2->length+1)*sizeof(char));
-	(result->data)[0]='\0';
+	memset(result->data,'0',sizeof(result->data));
 	int offset=0;
 	int i,j;
 	i=0;
 	j=0;
-	char *value;
+	int carry;
 	while(i< big2->length){
 		product=multiplyDigitBIG(big1,((big2->data)[i]-'0'));
 		j=0;
-		while((result->data)[j]
+		if(offset==0){
+			while((result->data[j]=product->data[j])!='\0'){
+				j++;
+			}
+			result->length=j;
+		}
+		else{
+			carry=0;
+			while(result->data[offset+j]!='\0' && product->data[j]!='\0'){
+				result->data[offset+j]=(carry+product->data[j]+result->data[offset+j]-2*48)%10+'0';
+				carry=(carry+product->data[j]+result->data[offset+j]-2*48)/10;
+				j++;
+			}
+			if(result->data[offset+j]=='\0'){
+				result->data[offset+j]=(carry+product->data[j]+'0'-2*48)%10+'0';
+				carry=(carry+product->data[j]+'0'-2*48)/10;
+				j++;
+				if(carry!=0){
+					result->data[offset+j]='0'+carry;
+					j++;
+				}
+			}
+			result->data[offset+j]='\0';
+			result->length=offset+j;
+		}
 		offset++;
 		i++;
 	}
 	return result;
 }
 BIG* multiplyDigitBIG(BIG *big1,int num){
+	char *value=toStringBIG(big1);
 	BIG *result;
 	result=(BIG *)malloc(sizeof(BIG));
 	result->data=(char *)malloc((2+big1->length)*sizeof(char));
